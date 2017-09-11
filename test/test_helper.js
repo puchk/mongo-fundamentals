@@ -6,3 +6,11 @@ mongoose.connection
 	.on('error', (error) => {
 		console.warn('Error:', error);
 	});
+
+// Drop collection each time ran
+beforeEach((done) => {
+	mongoose.connection.collections.users.drop(() => {
+		// Signals to mocha to run the next test
+		done();
+	});
+});
